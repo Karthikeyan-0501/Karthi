@@ -1,0 +1,50 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+const DataFetch = () => {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const apiurl = "http://localhost:3001/posts";
+        axios.get(apiurl)
+            .then((response) => { setData(response.data) })
+            .catch((error) => {
+                console.error("Error Fetching Data", error);
+            })
+    }, []);
+    return (
+        <div>
+            <h1>Backend Data</h1>
+            <ul>
+
+                {data.map((post) => (
+
+                    <li key={post.id}>{post.ide}-{post.name}-{post.discription}-{post.price}</li>
+                ))}
+
+            </ul>
+        </div>
+    )
+}
+export default DataFetch;
+
+//Json File
+{
+  "posts": [
+    {
+      "id":"1",
+      "ide": "1",
+      "name": "Product A",
+      "discription": "This is Product A ",
+      "Price":"$521"
+    }
+  ],
+  "data":[
+    {
+      "id":"1",
+      "title":"name",
+      "author":"poem"
+
+    }
+  ]
+  
+}
